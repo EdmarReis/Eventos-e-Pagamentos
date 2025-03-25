@@ -1,0 +1,12 @@
+gerar versao instalavel iphone
+flutter build ios --release
+flutter install
+
+Abrir projeto no xcode
+open ios/Runner.xcworkspace
+
+Gerar apk debug android
+flutter build apk --debug  
+
+Gerar apk build android
+flutter build apk --release

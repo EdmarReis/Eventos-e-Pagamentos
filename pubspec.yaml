@@ -7,6 +7,8 @@ environment:
   sdk: ^3.7.0
 
 dependencies:
+  firebase_core: ^2.21.1  # Atualize para versão mais recente compatível
+  firebase_messaging: ^14.9.4  # Ajuste para versão compatível com o firebase_core ^2.x.x
   flutter:
     sdk: flutter
   http: ^1.3.0

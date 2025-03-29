@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "346438293261",
+    "project_id": "cadastroeventos-1f7e8",
+    "storage_bucket": "cadastroeventos-1f7e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346438293261:android:fff71bd8f775738e8b8244",
+        "android_client_info": {
+          "package_name": "com.example.MeuGestor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlQDt7YvD7EB1nZGOH_wLdRRHszgphsoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346438293261:android:03dab68673ffc09d8b8244",
+        "android_client_info": {
+          "package_name": "com.example.flutter_banco_douro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlQDt7YvD7EB1nZGOH_wLdRRHszgphsoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

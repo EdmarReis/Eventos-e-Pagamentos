@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_banco_douro/models/compromisso_envio.dart';
 import 'package:flutter_banco_douro/services/compromisso_service.dart';
+import 'package:flutter_banco_douro/services/user_manager.dart';
 import 'package:flutter_banco_douro/ui/styles/colors.dart';
 
 class AddCompromissoModel extends StatefulWidget {
@@ -289,7 +290,8 @@ class _AddCompromissoModelState extends State<AddCompromissoModel> {
         recorrencia: _compromissoType, 
         intervaloRepeticao: intervaloRepeticao, 
         quantidadeEventos: quantidadeEventos, 
-        usuario: "Edmar", 
+        //usuario: "Edmar",
+        usuario: UserManager().getUser() as String,   
         horario: horario
       );
 

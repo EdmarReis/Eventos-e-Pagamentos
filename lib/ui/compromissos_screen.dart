@@ -137,32 +137,37 @@ class CompromissosScreenState extends State<CompromissosScreen> {
                                 ),
 
                                 trailing: PopupMenuButton<String>(
-  onSelected: (value) async {
-    if (value == "excluir") {
-      bool? confirmacao = await _confirmarExclusao(context);
-      
-      if (confirmacao == true) {
-        _finalizarCompromisso(context, compromisso.idEvento);
-      }
-    }
-  },
-  itemBuilder: (BuildContext context) => [
-    const PopupMenuItem(
-      value: "excluir",
-      child: ListTile(
-        leading: Icon(Icons.delete, color: Colors.red),
-        title: Text("Excluir"),
-      ),
-    ),
-  ],
-  child: const Icon(
-    Icons.settings,
-    color: Colors.grey,
-  ),
-),
+                                  onSelected: (value) async {
+                                    if (value == "excluir") {
+                                      bool? confirmacao =
+                                          await _confirmarExclusao(context);
 
-
-
+                                      if (confirmacao == true) {
+                                        _finalizarCompromisso(
+                                          context,
+                                          compromisso.idEvento,
+                                        );
+                                      }
+                                    }
+                                  },
+                                  itemBuilder:
+                                      (BuildContext context) => [
+                                        const PopupMenuItem(
+                                          value: "excluir",
+                                          child: ListTile(
+                                            leading: Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                            title: Text("Excluir"),
+                                          ),
+                                        ),
+                                      ],
+                                  child: const Icon(
+                                    Icons.settings,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               ),
                             );
                           },
@@ -240,6 +245,4 @@ class CompromissosScreenState extends State<CompromissosScreen> {
       },
     );
   }
-
-  
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_banco_douro/models/pagamento_envio.dart';
 import 'package:flutter_banco_douro/services/pagamento_services.dart';
+import 'package:flutter_banco_douro/services/user_manager.dart';
 import 'package:flutter_banco_douro/ui/styles/colors.dart';
 
 class AddPagamentoModel extends StatefulWidget {
@@ -284,7 +285,8 @@ class _AddCompromissoModelState extends State<AddPagamentoModel> {
         recorrencia: _compromissoType,
         intervaloRepeticao: intervaloRepeticao,
         quantidadeEventos: quantidadeEventos,
-        usuario: "Edmar",
+        //usuario: "Edmar",
+        usuario: UserManager().getUser() as String,
         valor: valor!,
       );
 

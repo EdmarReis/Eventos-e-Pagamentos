@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_banco_douro/ui/compromissos_screen.dart';
+import 'package:flutter_banco_douro/ui/pagamentos_screen.dart';
 
 class EscolhaScreen extends StatelessWidget {
   const EscolhaScreen({super.key});
@@ -9,13 +11,10 @@ class EscolhaScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 2,
+        automaticallyImplyLeading: false, // Remove a seta de voltar automática
         title: const Text(
           "Escolha uma opção",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
@@ -26,10 +25,14 @@ class EscolhaScreen extends StatelessWidget {
           ),
         ],
       ),
+
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1E1E1E), Color(0xFF3A3A3A)],
+            colors: [
+              Color.fromARGB(255, 0, 0, 0),
+              Color.fromARGB(255, 0, 0, 0),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -46,7 +49,31 @@ class EscolhaScreen extends StatelessWidget {
                   title: "Gerenciar Compromissos",
                   subtitle: "Crie e acompanhe seus compromissos",
                   onTap: () {
-                    Navigator.pushNamed(context, "telaCompromissos");
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return CompromissosScreen();
+                        },
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+
+                    //Navigator.pushNamed(context, "telaCompromissos");
+                    //Navigator.push(
+                    //context,
+                    //CupertinoPageRoute(builder: (context) => CompromissosScreen()),
+                    //);
                   },
                 ),
                 const SizedBox(height: 30),
@@ -56,7 +83,27 @@ class EscolhaScreen extends StatelessWidget {
                   title: "Gerenciar Pagamentos",
                   subtitle: "Visualize e controle seus pagamentos",
                   onTap: () {
-                    Navigator.pushNamed(context, "telaPagamentos");
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return PagamentosScreen();
+                        },
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+
+                    //Navigator.pushNamed(context, "telaPagamentos");
                   },
                 ),
               ],
@@ -67,7 +114,13 @@ class EscolhaScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOptionButton(BuildContext context, {required String imagePath, required String title, required String subtitle, required VoidCallback onTap}) {
+  Widget _buildOptionButton(
+    BuildContext context, {
+    required String imagePath,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -77,7 +130,7 @@ class EscolhaScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
               blurRadius: 6,
               spreadRadius: 2,
               offset: const Offset(0, 3),
@@ -104,15 +157,15 @@ class EscolhaScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     subtitle,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
           ],
         ),
       ),

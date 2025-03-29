@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_banco_douro/models/compromisso.dart';
 import 'package:flutter_banco_douro/models/compromisso_envio.dart';
+import 'package:flutter_banco_douro/services/api_key.dart';
+import 'package:flutter_banco_douro/services/user_manager.dart';
 import 'package:http/http.dart' as http;
 
 class CompromissoService {
@@ -12,7 +14,7 @@ class CompromissoService {
     try {
       final response = await http.post(
         Uri.parse("$baseUrl/criarEventoCompromisso"),
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json','X-API-KEY':apiKey},
         body: jsonEncode(compromissoEnvio.toMap()), // Convertendo para JSON
       );
 
@@ -29,8 +31,10 @@ class CompromissoService {
 
   Future<List<Compromisso>> fetchCompromissos() async {
     try {
+      String user = UserManager().getUser() as String;
       final response = await http.post(
-        Uri.parse("$baseUrl/envio/compromissos/app"),
+        headers: {'Content-Type': 'application/json','X-API-KEY':apiKey},
+        Uri.parse("$baseUrl/envio/compromissos/app/$user"),
       );
 
       if (response.statusCode == 200) {
@@ -47,11 +51,11 @@ class CompromissoService {
   }
 
   Future<bool> finalizarCompromisso(int idEvento) async {
-    final url = Uri.parse("http://192.168.0.190:8085/finalizar/$idEvento");
-
     try {
-      final response = await http.post(url);
-
+      final response = await http.post(
+        headers: {'Content-Type': 'application/json','X-API-KEY':apiKey},
+        Uri.parse("$baseUrl/finalizar/$idEvento"),
+      );
       if (response.statusCode == 200) {
         return true; // Finalização bem-sucedida
       } else {
@@ -61,5 +65,4 @@ class CompromissoService {
       return false; // Erro de conexão
     }
   }
-
 }

@@ -1,5 +1,7 @@
 import 'package:flutter_banco_douro/models/pagamento.dart';
 import 'package:flutter_banco_douro/models/pagamento_envio.dart';
+import 'package:flutter_banco_douro/services/api_key.dart';
+import 'package:flutter_banco_douro/services/user_manager.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,6 +18,7 @@ class PagamentoServices {
         Uri.parse("$baseUrl/criarEventoPagamento"),
         headers: {
           'Content-Type': 'application/json',
+          'X-API-KEY':apiKey
         },
         body: jsonEncode(compromissoEnvio.toMap()), // Convertendo para JSON
       );
@@ -33,7 +36,11 @@ class PagamentoServices {
 
   Future<List<Pagamento>> fetchPagamentos() async {
     try {
-      final response = await http.post(Uri.parse("$baseUrl/envio/pagamentos/app"));
+      String user = UserManager().getUser() as String;
+      final response = await http.post(
+        headers: {'Content-Type': 'application/json','X-API-KEY':apiKey},
+        Uri.parse("$baseUrl/envio/pagamentos/app/$user")
+      );
 
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
@@ -47,10 +54,12 @@ class PagamentoServices {
   }
 
   Future<bool> finalizarPagamento(int idEvento) async {
-    final url = Uri.parse("http://192.168.0.190:8085/finalizar/$idEvento");
 
     try {
-      final response = await http.post(url);
+      final response = await http.post(
+        headers: {'Content-Type': 'application/json','X-API-KEY':apiKey},
+        Uri.parse("$baseUrl/finalizar/$idEvento"),
+      );
 
       if (response.statusCode == 200) {
         return true; // Finalização bem-sucedida
